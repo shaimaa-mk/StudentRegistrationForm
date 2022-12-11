@@ -4,8 +4,6 @@ By Shaima'a Khashan
 # Import requests library
 import requests
 import json
-# Create students list to store their details
-students = []
 # APIs Endpoints
 create_api = "http://staging.bldt.ca/api/method/build_it.test.register_student"
 update_api = "http://staging.bldt.ca/api/method/build_it.test.edit_student"
@@ -50,8 +48,6 @@ while True:
                                                           'age': age,
                                                           'level': level,
                                                           'mobile_number': mobile_no})
-        # Get Student ID who's just created in server
-        std_id = create_response.json()['data']['id']
     # Case 2 : Update student information
     elif choice == 2:
         # Get student ID from user
@@ -90,7 +86,7 @@ while True:
             # Get students details who's created in server
             students_details = students_response.json()['data']
             # If Students.txt file exists then append new inputs with last one, else create Students.txt file
-            file = open("Students.txt", "a")
+            file = open("Students.txt", "w")
             # Write each student details separately
             for one in students_details:
                 file.write(f"Student ID:{one['id']} Full Name: {one['full_name']} Age: {one['age']} "
@@ -113,7 +109,7 @@ while True:
             # Check status
             if student_response.status_code == True:
                 # If Student.txt file exists then append new inputs with last one, else create Student.txt file
-                file = open("Student.txt", "a")
+                file = open("Student.txt", "w")
                 # Write student details
                 file.write(f"Student ID:{std_details['id']} Full Name: {std_details['full_name']} "
                            f"Age: {std_details['age']} Level: {std_details['level']} "
